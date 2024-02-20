@@ -3,11 +3,35 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import Login from './components/Login';
+import Background from './components/Background';
+import LoginPage from './page/LoginPage';
+import UserInfo from './components/UserInfo';
+import clientService from './service/clientService';
+import relyingPartyService from './service/relyingPartyService';
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Login clientService={clientService} />, // Use the 'element' property instead of 'Component'
+  },
+  {
+    path:'home',
+    element:<Background/>
+  },
+  {
+    path:'test',
+    element:<LoginPage/>
+  },
+  {
+    path:'/userprofile',
+    element: <UserInfo relyingPartyService={relyingPartyService}/>
+  }
+]);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
